@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,10 +69,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             solutionTv.setText(resultTv.getText());
         }
         if (buttonText.equalsIgnoreCase("C")){
-            dataToCalculate = dataToCalculate.substring(0 , dataToCalculate.length()-1);
+            try{
+                if(!dataToCalculate.equals("")){
+                    dataToCalculate = dataToCalculate.substring(0 , dataToCalculate.length()-1);
+                }
+            }
+            catch(Exception e){
+                solutionTv.setText("0");
+            }
+        }
+        else{
+            dataToCalculate = dataToCalculate + buttonText;
         }
         solutionTv.setText(dataToCalculate);
+
+        String finalResult = getResult(dataToCalculate);
+
+        if(!finalResult.equalsIgnoreCase("Err")){
+            resultTv.setText(finalResult);
+        }
+        /*else{
+            resultTv.setText("Error");
+        }*/
+
     }
 
-    
+    String getResult(String data){
+        try {
+            Context context = Context.enter();
+            context.setOptimizationLevel(-1);
+            Scriptable scriptable = context.initStandardObjects();
+            String finalResult = context.evaluateString(scriptable , data , "Javascript" , 1 , null).toString();
+            if(finalResult.endsWith(".0")){
+                finalResult = finalResult.replace(".0","");
+            }
+            return finalResult;
+        }
+        catch (Exception e){
+            return "Err";
+        }
+        //return null;
+    }
+
 }

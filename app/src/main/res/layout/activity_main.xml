@@ -286,7 +286,7 @@
                 android:layout_margin="12dp"
                 android:id="@+id/button_equals"
                 android:backgroundTint="#FF9800"
-                android:text="+"/>
+                android:text="="/>
         </LinearLayout>
 
     </LinearLayout>
