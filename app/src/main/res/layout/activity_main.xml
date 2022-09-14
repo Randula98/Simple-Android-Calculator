@@ -183,12 +183,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_dot"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_margin="12dp"
+                android:layout_width="02dp"
+                android:layout_height="02dp"
+                android:layout_margin="02dp"
                 android:text="."
                 android:textColor="@color/white"
-                android:textSize="32dp"
+                android:textSize="20dp"
                 app:cornerRadius="36dp" />
         </LinearLayout>
 
